@@ -36,7 +36,7 @@ class _DicePageState extends State<DicePage> {
               onPressed: () {
                 setState(
                   () {
-                    randomNumberLeft = getRandomNumberLessThanSix();
+                    randomNumberLeft = getRandomNumberLessThanSeven();
                   },
                 );
               },
@@ -48,7 +48,7 @@ class _DicePageState extends State<DicePage> {
               onPressed: () {
                 setState(() {
                   print('right button pressed by user');
-                  randomNumberRight = getRandomNumberLessThanSix();
+                  randomNumberRight = getRandomNumberLessThanSeven();
                 });
               },
               child: Image.asset('images/dice$randomNumberRight.png'),
@@ -59,12 +59,7 @@ class _DicePageState extends State<DicePage> {
     );
   }
 
-  int getRandomNumberLessThanSix() {
-    Random rnd;
-    int min = 1;
-    int max = 6;
-    rnd = new Random();
-    int r = min + rnd.nextInt(max - min);
-    return r;
+  int getRandomNumberLessThanSeven() {
+    return Random().nextInt(6) + 1;
   }
 }
