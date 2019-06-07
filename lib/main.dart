@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +17,15 @@ void main() {
   );
 }
 
-class DicePage extends StatelessWidget {
+class DicePage extends StatefulWidget {
+  @override
+  _DicePageState createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
+  int randomNumberLeft = 1;
+  int randomNumberRight = 1;
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -24,21 +34,37 @@ class DicePage extends StatelessWidget {
           Expanded(
             child: FlatButton(
               onPressed: () {
-                print('left button pressed by user');
+                setState(
+                  () {
+                    randomNumberLeft = getRandomNumberLessThanSix();
+                  },
+                );
               },
-              child: Image.asset('images/dice1.png'),
+              child: Image.asset('images/dice$randomNumberLeft.png'),
             ),
           ),
           Expanded(
             child: FlatButton(
               onPressed: () {
-                print('right button pressed by user');
+                setState(() {
+                  print('right button pressed by user');
+                  randomNumberRight = getRandomNumberLessThanSix();
+                });
               },
-              child: Image.asset('images/dice1.png'),
+              child: Image.asset('images/dice$randomNumberRight.png'),
             ),
           ),
         ],
       ),
     );
+  }
+
+  int getRandomNumberLessThanSix() {
+    Random rnd;
+    int min = 1;
+    int max = 6;
+    rnd = new Random();
+    int r = min + rnd.nextInt(max - min);
+    return r;
   }
 }
